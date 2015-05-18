@@ -1,0 +1,38 @@
+html, body
+    height: 100%
+    width: 100%
+    margin: 0
+    outline: 0
+    padding: 0
+
+#main-panel
+    position: absolute
+    width: 100%
+    height: 100%
+    margin: auto
+    top: 0
+    bottom: 0
+    left: 0
+    right: 0
+
+    @media #{$screen-query-small}
+        &
+            width: 100%
+            // height: 500px
+
+    @media #{$screen-query-medium}
+        &
+            width: 840px
+            height: 500px
+
+    @media #{$screen-query-large}
+        &
+            width: 840px
+
+
+
+    .input-obj
+        margin-bottom: 10px
+
+    #saveBtn
+        margin-top: 20px

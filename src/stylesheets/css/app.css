@@ -1,0 +1,40 @@
+html, body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  outline: 0;
+  padding: 0;
+}
+
+#main-panel {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  margin: auto;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+@media (min-width: 740px) and (min-device-width: 740px), (max-device-width: 800px) and (min-width: 740px) and (orientation: landscape) {
+  #main-panel {
+    width: 100%;
+  }
+}
+@media (min-width: 980px) and (min-device-width: 980px), all and (max-device-width: 1024px) and (min-width: 1024px) and (orientation: landscape) {
+  #main-panel {
+    width: 840px;
+    height: 500px;
+  }
+}
+@media (min-width: 1200px) {
+  #main-panel {
+    width: 840px;
+  }
+}
+#main-panel .input-obj {
+  margin-bottom: 10px;
+}
+#main-panel #saveBtn {
+  margin-top: 20px;
+}

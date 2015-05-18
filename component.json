@@ -1,0 +1,12 @@
+{
+    "name": "TrainingManager",
+    "version": "0.0.1",
+    "dependencies": {
+        "bootstrap": null,
+        "jquery": null,
+        "underscore-amd": null,
+        "backbone-amd": null,
+        "requirejs": null,
+        "requirejs-text": null
+    }
+}

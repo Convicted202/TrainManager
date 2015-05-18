@@ -1,0 +1,27 @@
+$screen-xs: 480px
+$screen-sm: 768px
+$screen-md: 992px
+$screen-lg: 1200px
+
+$screen-xs-min: $screen-xs
+$screen-sm-min: $screen-sm
+$screen-md-min: $screen-md
+$screen-lg-min: $screen-lg
+
+$screen-xs-max: $screen-sm-min - 1
+$screen-sm-max: $screen-md-min - 1
+$screen-md-max: $screen-lg-min - 1
+
+$screen-query-x-small: "(max-width: #{$screen-xs-max})"
+$screen-query-small:   "(min-width: #{$screen-sm-min}) and (max-width: #{$screen-sm-max})"
+$screen-query-medium:  "(min-width: #{$screen-md-min}) and (max-width: #{$screen-md-max})"
+$screen-query-large:   "(min-width: #{$screen-lg-min})"
+
+
+$screen-query-x-small: "(min-width: 480px) and (min-device-width: 480px), (max-device-width: 740px) and (min-width: 480px) and (orientation:landscape)"
+
+$screen-query-small: "(min-width: 740px) and (min-device-width: 740px), (max-device-width: 800px) and (min-width: 740px) and (orientation:landscape)"
+
+$screen-query-medium: "(min-width: 980px) and (min-device-width: 980px), all and (max-device-width: 1024px) and (min-width: 1024px) and (orientation:landscape)"
+
+$screen-query-large  : "(min-width: 1200px)"
