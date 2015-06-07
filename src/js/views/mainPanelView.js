@@ -2,11 +2,12 @@ define([
     'underscore',
     'jquery',
     'backbone',
+    'json!langs.json',
     'text!templates/mainPanel.tpl',
     'views/createUpdateStudentView',
     'views/reviewView',
     'views/reportView'
-], function(_, $, Backbone, Template, CreateUpdateView, ReviewView, ReportView){
+], function(_, $, Backbone, Langs, Template, CreateUpdateView, ReviewView, ReportView){
     'use strict';
 
     return Backbone.View.extend({
@@ -20,6 +21,8 @@ define([
         },
 
         initialize: function() {
+            this.lang = Backbone.getLang();
+
             this.template = _.template(Template);
 
             $(Backbone.areas.appContainer).html(this.$el);
@@ -27,10 +30,10 @@ define([
             this.delegateEvents();
         },
 
-        render: function(area) {
+        render: function(area, areaName) {
             // $(Backbone.areas.pageHeader).html(this.model.get('name'));
 
-            this.$el.append(this.template());
+            this.$el.append(this.template({ _area: areaName, lang: Langs[this.lang].views.mainView }));
             new area().render();
 
             return this;

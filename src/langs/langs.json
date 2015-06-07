@@ -1,0 +1,182 @@
+{
+    "en": {
+        "views": {
+            "login": {
+                "login": "Login",
+                "signin": "Sign In",
+                "email": "Email",
+                "pass": "Password",
+                "register": "Register",
+                "needhelp": "Need Help?"
+            },
+            "mainView": {
+                "createTab": "Blank Entry",
+                "reviewTab": "Students Review",
+                "reportsTab": "Reports",
+                "preferencesTab": "Preferences"
+            },
+            "createStudent": {
+                "title": "Create/Update",
+                "passId": "Passport ID",
+                "firstName": "First Name",
+                "lastName": "Last Name",
+                "birthDate": "Birth Date",
+                "coachName": "Coach Name",
+                "levelToAchieve": "Level to Achieve",
+                "seminarCost": "Seminar Payment",
+                "certCost": "Certification Payment",
+                "saveBtn": "Save"
+            },
+            "review": {
+                "passID": "ID",
+                "firstName": "First Name",
+                "lastName": "Last Name",
+                "birthDate": "Birth Date",
+                "coachName": "Coach",
+                "levelToAchieve": "Level",
+                "seminarCost": "Sem. Cost",
+                "certCost": "Cert. Cost",
+                "search": {
+                    "all": "ALL",
+                    "passID": "ID",
+                    "firstName": "First Name",
+                    "lastName": "Last Name",
+                    "birthDate": "Birthday",
+                    "coachName": "Coach",
+                    "levelToAchieve": "Level",
+                    "seminarCost": "Seminar Cost",
+                    "certCost": "Certification Cost",
+                    "editBtn": "Edit",
+                    "viewBtn": "View"
+                }
+            },
+            "preferences": {
+                "title": "Preferences",
+                "langLabel": "Language",
+                "en": "English",
+                "uk": "Ukrainian",
+                "ru": "Russian"
+            }
+        }
+    },
+    "ru": {
+        "views": {
+            "login": {
+                "login": "Логин",
+                "signin": "Войти",
+                "email": "Email",
+                "pass": "Пароль",
+                "register": "Регистрация",
+                "needhelp": "Нужна помощь?"
+            },
+            "mainView": {
+                "createTab": "Новый студент",
+                "reviewTab": "Список студентов",
+                "reportsTab": "Отчеты",
+                "preferencesTab": "Настройки"
+            },
+            "createStudent": {
+                "title": "Создать/Изменить",
+                "passId": "Номер Паспорта",
+                "firstName": "Имя",
+                "lastName": "Фамилия",
+                "birthDate": "День рождения",
+                "coachName": "Тренер",
+                "levelToAchieve": "Добываемый уровень",
+                "seminarCost": "Стоимость семинара",
+                "certCost": "Стоимость сертификации",
+                "saveBtn": "Сохранить"
+            },
+            "review": {
+                "passID": "Паспорт",
+                "firstName": "Имя",
+                "lastName": "Фамилия",
+                "birthDate": "День рождения",
+                "coachName": "Тренер",
+                "levelToAchieve": "Уровень",
+                "seminarCost": "Ст. семинара",
+                "certCost": "Ст. сертификации",
+                "search": {
+                    "all": "ВСЕ",
+                    "passID": "Паспорт",
+                    "firstName": "Имя",
+                    "lastName": "Фамилия",
+                    "birthDate": "День рождения",
+                    "coachName": "Тренер",
+                    "levelToAchieve": "Уровень",
+                    "seminarCost": "Стоимость семинара",
+                    "certCost": "Стоимость сертификации",
+                    "editBtn": "Редактировать",
+                    "viewBtn": "Показать"
+                }
+            },
+            "preferences": {
+                "title": "Настройки",
+                "langLabel": "Язык",
+                "en": "Английский",
+                "uk": "Украинский",
+                "ru": "Русский"
+            }
+        }
+    },
+    "uk": {
+        "views": {
+            "login": {
+                "login": "Логін",
+                "signin": "Вхід",
+                "email": "Email",
+                "pass": "Пароль",
+                "register": "Регістрація",
+                "needhelp": "Потібна допомога?"
+            },
+            "mainView": {
+                "createTab": "Новий студент",
+                "reviewTab": "Список студентів",
+                "reportsTab": "Звіти",
+                "preferencesTab": "Налаштування"
+            },
+            "createStudent": {
+                "title": "Створити/Редагувати",
+                "passId": "Номер Паспорту",
+                "firstName": "Ім'я",
+                "lastName": "Прізвище",
+                "birthDate": "День нарождення",
+                "coachName": "Тренер",
+                "levelToAchieve": "Рівень на здобуття",
+                "seminarCost": "Вартість семінару",
+                "certCost": "Вартість сертифікації",
+                "saveBtn": "Зберегти"
+            },
+            "review": {
+                "passID": "Паспорт",
+                "firstName": "Ім'я",
+                "lastName": "Прізвище",
+                "birthDate": "День нарождення",
+                "coachName": "Тренер",
+                "levelToAchieve": "Рівень",
+                "seminarCost": "Варт. семінару",
+                "certCost": "Варт. сертифікації",
+                "search": {
+                    "all": "ВСІ",
+                    "passID": "Паспорт",
+                    "firstName": "Ім'я",
+                    "lastName": "Прізвище",
+                    "birthDate": "День нарождення",
+                    "coachName": "Тренер",
+                    "levelToAchieve": "Рівень",
+                    "seminarCost": "Вартість семінару",
+                    "certCost": "Вартість сертифікації",
+                    "editBtn": "Редагувати",
+                    "viewBtn": "Показати"
+                }
+            },
+            "preferences": {
+                "title": "Налаштування",
+                "langLabel": "Мова",
+                "en": "Англійська",
+                "uk": "Українська",
+                "ru": "Російська"
+            }
+        }
+    }
+}

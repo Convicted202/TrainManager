@@ -9,6 +9,9 @@ require([
 
     window.app = window.app || {};
 
+    window.app.login = 'admin@www.com';
+    window.app.password = 'qwerty123';
+
     $(function () {
         app.route = new Router();
         Backbone.history.start();

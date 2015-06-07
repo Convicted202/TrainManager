@@ -3,9 +3,16 @@ define([
     'underscore',
     'backbone',
     'models/student',
+    'models/userCredentials',
+    'models/preferences',
     'views/createUpdateStudentView',
-    'views/mainPanelView'
-    ], function($, _, Backbone, Student, CreateUpdateView, MainPanelView) {
+    'views/reviewView',
+    'views/reportView',
+    'views/mainPanelView',
+    'views/preferencesView',
+    'views/loginView',
+    'collections/students-collection'
+    ], function($, _, Backbone, Student, CredModel, PreferencesModel, CreateUpdateView, ReviewView, ReportView, MainPanelView, PreferencesView, LoginView, StudentsCollection) {
 
 
     /*  Defining main areas from index.html
@@ -18,6 +25,22 @@ define([
             panel: '#main-panel',
             panelNav: '#panel-heading',
             panelContent: '#panel-content'
+        },
+
+        tryLogout: function() {
+            cred = new CredModel();
+            cred.fetch();
+            if (cred.isExpired()) {
+                Backbone.history.navigate('login');
+                Backbone.history.loadUrl();
+                return;
+            }
+        },
+
+        getLang: function() {
+            var model = new PreferencesModel();
+            model.fetch();
+            return model.get('lang').toLowerCase();
         }
     });
 
@@ -26,30 +49,27 @@ define([
         this.mainModel = null,
 
         this.initialize = function() {
-
+            StudentsCollection.fetch();
         },
 
-        this.fetchMain = function() {
-
-            // this.mainModel = new MainModel();
-
-            // this.mainModel.fetch();
+        this.login = function() {
+            return new LoginView().render();
         },
 
         this.main = function () {
-            // console.log('main page');
-
-            // Renderer.fetchMain();
-            return new MainPanelView().render(CreateUpdateView);
-            // return new CreateUpdateView().render();
+            return new MainPanelView().render(CreateUpdateView, 'CreateUpdateView');
         },
 
         this.review = function(query) {
-
+            return new MainPanelView().render(ReviewView, 'ReviewView');
         },
 
         this.reports = function() {
+            return new MainPanelView().render(ReportView, 'ReportView');
+        },
 
+        this.preferences = function() {
+            return new MainPanelView().render(PreferencesView, 'PreferencesView');
         }
     }
 
@@ -60,10 +80,12 @@ define([
         },
 
         routes: {
+            "login":            Renderer.login,
             "":                 Renderer.main,         // '/'' or '/#'
             "blankEntry":       Renderer.main,        // '/#main'
-            "review/:query":    Renderer.review,        // '/#box/(query)
+            "review":           Renderer.review,        // '/#box/(query)
             "reports":          Renderer.reports,    // '/#fruits/(query)
+            "preferences":      Renderer.preferences
         }
     });
 });

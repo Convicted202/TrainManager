@@ -22,6 +22,10 @@ module.exports = function(grunt) {
       sass: {
         files: ['<%= config.dev %>/**/*.sass'],
         tasks: ['sass']
+      },
+      yml: {
+        files: ['<%= config.dev %>/**/*.yml'],
+        tasks: ['yaml']
       }
     },
 
@@ -34,6 +38,18 @@ module.exports = function(grunt) {
         },
         files: {
           '<%= config.dev %>/stylesheets/css/app.css': '<%= config.dev %>/stylesheets/sass/app.sass'
+        }
+      }
+    },
+
+    yaml: {
+      dev: {
+        options: {
+          space: 4,
+          strict: true
+        },
+        files: {
+          '<%= config.dev %>/langs/langs.json': '<%= config.dev %>/langs/langs.yml'
         }
       }
     },
@@ -55,6 +71,7 @@ module.exports = function(grunt) {
 
   grunt.registerTask('default', [
     'sass:dev',
+    'yaml:dev',
     'connect:dev',
     'watch'
   ]);

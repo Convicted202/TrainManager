@@ -5,6 +5,9 @@ html, body
     outline: 0
     padding: 0
 
+button
+    outline: none !important
+
 #main-panel
     position: absolute
     width: 100%
@@ -19,16 +22,35 @@ html, body
         &
             width: 100%
             // height: 500px
+            border: none
+            -webkit-box-shadow: none
+            box-shadow: none
 
     @media #{$screen-query-medium}
         &
             width: 840px
             height: 500px
+            border: 1px solid #ddd
+            -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .05)
+            box-shadow: 0 1px 1px rgba(0, 0, 0, .05)
 
     @media #{$screen-query-large}
         &
             width: 840px
 
+    .panel-body
+        overflow: auto
+        @media #{$screen-query-small}
+            &
+                min-height: 50%
+
+        @media #{$screen-query-medium}
+            &
+                height: 437px
+
+        @media #{$screen-query-large}
+            &
+                height: 437px
 
 
     .input-obj
@@ -36,3 +58,60 @@ html, body
 
     #saveBtn
         margin-top: 20px
+
+    #searchGroup
+        padding-left: 0
+
+    #searchArea
+        margin-left: 0
+        margin-right: 0
+
+#viewEditBtn
+    button
+        float: right
+        width: auto
+        min-width: 90px
+
+    #editBtn
+        display: inline-block
+
+    #viewBtn
+        display: none
+
+    &.edit
+        #editBtn
+            display: none
+
+        #viewBtn
+            display: inline-block
+
+
+#review-tbl
+    thead
+        box-shadow: 0px 5px 5px #888
+        background-color: rgb(255, 255, 255)
+        border-bottom: 2px solid #ddd
+
+        > tr
+            > th
+                border-bottom: none
+
+    tbody
+        .deleteStudentBtn
+            &.invisible
+                display: none
+
+            .deleteStudentIcon
+                padding: 6px
+                border-radius: 3px
+                cursor: pointer
+
+@media (min-width: 768px)
+    .modal-dialog
+        margin: 10% auto
+
+#langDropDown
+    display: inline-block
+
+.ct-chart
+    height: 300px
