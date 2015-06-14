@@ -9,8 +9,10 @@ define([
             numberRegExp: /^[0-9]+$/
         },
 
+        urlRoot: '/students',
+
         defaults: {
-            id: 0,
+            _id: 0,
             addedOn: Date.now(),
             name: "John",
             lastname: "Smith",

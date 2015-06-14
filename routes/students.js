@@ -1,43 +1,92 @@
-var mongo = require('mongodb');
+var mongoose = require('mongoose'),
+    Student  = require('../models/studentModel').Student;
 
-var Server  = mongo.Server,
-    Db      = mongo.Db,
-    BSON    = mongo.BSONPure;
+// var Server  = mongo.Server,
+//     Db      = mongo.Db,
+//     BSON    = mongo.BSONPure;
 
-var server,
+var db,
+    server,
     studentsToExp = {};
 
-server = new Server('localhost', 27017, {auto_reconnect: true});
-db = new Db('studentsTrainingDB', server, {safe: true});
+// server = new Server('localhost', 27017, {auto_reconnect: true});
+// db = new Db('studentsTrainingDB', server, {safe: true});
 
-db.open(function(err, db) {
-    if(!err) {
-        console.log("Connected to 'studentsTrainingDB' database");
-        db.collection('students', {strict: true}, function(err, collection) {
-            if (err) {
-                console.log("The 'students' collection doesn't exist. Creating it with sample data...");
-                PopulateDB();
-            }
+mongoose.connect('mongodb://localhost/studentsTrainingDB');
 
-            // collection.insert(student, {safe:true}, function(err, result) {
-            //     if (err) {
-            //         console.log('error occured');
-            //     } else {
-            //         console.log('everything okay');
-            //     }
-            // });
-        });
-    }
+// db.open(function(err, db) {
+//     if(!err) {
+//         console.log("Connected to 'studentsTrainingDB' database");
+//         db.collection('students', {strict: true}, function(err, collection) {
+//             if (err) {
+//                 console.log("The 'students' collection doesn't exist. Creating it with sample data...");
+//                 PopulateDB();
+//             }
+
+//             // collection.insert(student, {safe:true}, function(err, result) {
+//             //     if (err) {
+//             //         console.log('error occured');
+//             //     } else {
+//             //         console.log('everything okay');
+//             //     }
+//             // });
+//         });
+//     }
+// });
+
+db = mongoose.connection;
+
+db.on('error', function() {
+    console.error.bind(console, 'connection error:')
+});
+
+db.on('open', function (callback) {
+    console.log('connected successfully');
+    // Student.find(function(err, items) {
+    //     if (!items.length) {
+    //         PopulateDB();
+    //     }
+    // })
+
+
+    // db.collectionNames(function (err, names) {
+    //     console.log(names); // [{ name: 'dbname.myCollection' }]
+    //     // module.exports.Collection = names;
+    // });
+    // console.log(db);
+    // console.log(Student)
 });
 
 studentsToExp.retrieveAll = function(req, res) {
-    db.collection('students', function(err, collection) {
-        collection.find().toArray(function(err, items) {
-            res.send(items);
-            console.log('everything retrieved well');
-        });
+    // db.collection('students', function(err, collection) {
+    //     collection.find().toArray(function(err, items) {
+    //         res.send(items);
+    //         console.log('everything retrieved well');
+    //     });
+    // });
+
+    Student.find(function(err, items) {
+        if (err) return console.error(err);
+
+        res.send(items);
+        console.log('everything retrieved well');
     });
 };
+
+studentsToExp.addNew = function(req, res) {
+    stud = new Student(req.body);
+
+    console.log(req);
+
+    stud.save(function (err, fluffy) {
+        if (err) {
+            return console.error(err);
+        } else {
+            console.log('saved successfully');
+        }
+
+    })
+}
 
 exports.students = studentsToExp;
 
@@ -147,7 +196,16 @@ function PopulateDB() {
         }
     ];
 
-    db.collection('students', function(err, collection) {
-        collection.insert(students, {safe:true}, function(err, result) {});
-    });
+    // console.log(students.forEach);
+
+    students.forEach(function(el) {
+        var stud = new Student(el);
+        stud.save(function(er) {
+            console.log(er);
+        })
+    })
+
+    // db.collection('students', function(err, collection) {
+    //     collection.insert(students, {safe:true}, function(err, result) {});
+    // });
 }

@@ -71,9 +71,9 @@ define([
             options = options || {};
             options.collection = options.collection || StudentsCollection;
 
-            if (options.fetch) {
+            // if (options.fetch) {
                 StudentsCollection.fetch();
-            }
+            // }
 
             langsTpl = Langs[this.lang].views.review;
 

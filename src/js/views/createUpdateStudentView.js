@@ -110,7 +110,7 @@ define([
             Backbone.tryLogout();
 
             model = new StudentModel({
-                id: Date.now(),
+                _id: Date.now(),
                 name: this.$firstName.val(),
                 lastname: this.$lastName.val(),
                 birthdate: this.$birthDate.val(),

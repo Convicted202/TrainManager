@@ -1,7 +1,8 @@
 define([
     'backbone',
-    'models/student',
-    'backbone.localStorage'
+    'models/student'
+    // ,
+    // 'backbone.localStorage'
 ], function(Backbone, StudentModel) {
     'use strict';
 

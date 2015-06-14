@@ -15,7 +15,6 @@
     "StickyTableHeaders": "~0.1.17",
     "requirejs-plugins": "~1.0.3",
     "chartist": "~0.8.0",
-    "chartjs": "~1.0.2",
     "chartist-plugin-tooltip": "~0.0.10"
   }
 }

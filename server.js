@@ -1,7 +1,7 @@
 var express  = require('express'),
     path     = require('path'),
     http     = require('http'),
-    training = require('./routes/students');
+    students = require('./routes/students').students;
 
 var app = express();
 
@@ -14,7 +14,8 @@ var app = express();
     });
 
 
-    app.get('/students', training.students.retrieveAll);
+    app.get('/students', students.retrieveAll);
+    app.post('/students', students.addNew);
 
 
 http.createServer(app).listen(app.get('port'), function() {
