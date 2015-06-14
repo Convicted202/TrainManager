@@ -38,8 +38,6 @@ define([
 
             this.template = _.template(Template);
 
-            StudentsCollection.fetch();
-
             $(Backbone.areas.panelContent).html(this.$el);
 
             this.delegateEvents();
@@ -48,7 +46,8 @@ define([
         render: function() {
             var root = this;
 
-            Backbone.tryLogout();
+            // Backbone.tryLogout();
+            StudentsCollection.fetch();
 
             this.$el.append(this.template({ lang: Langs[this.lang].views.createStudent }));
 
@@ -107,10 +106,9 @@ define([
         saveStudent: function() {
             var model;
 
-            Backbone.tryLogout();
+            // Backbone.tryLogout();
 
             model = new StudentModel({
-                _id: Date.now(),
                 name: this.$firstName.val(),
                 lastname: this.$lastName.val(),
                 birthdate: this.$birthDate.val(),

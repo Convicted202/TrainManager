@@ -55,7 +55,7 @@ define([
 
         render: function() {
             // $(Backbone.areas.pageHeader).html(this.model.get('name'));
-            Backbone.tryLogout();
+            // Backbone.tryLogout();
 
             this.$el.append(this.template());
 

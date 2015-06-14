@@ -24,6 +24,5 @@
   },
   "_source": "git://github.com/Globegitter/chartist-plugin-tooltip.git",
   "_target": "~0.0.10",
-  "_originalSource": "chartist-plugin-tooltip",
-  "_direct": true
+  "_originalSource": "chartist-plugin-tooltip"
 }

@@ -58,34 +58,53 @@ db.on('open', function (callback) {
 });
 
 studentsToExp.retrieveAll = function(req, res) {
-    // db.collection('students', function(err, collection) {
-    //     collection.find().toArray(function(err, items) {
-    //         res.send(items);
-    //         console.log('everything retrieved well');
-    //     });
-    // });
-
     Student.find(function(err, items) {
-        if (err) return console.error(err);
-
-        res.send(items);
-        console.log('everything retrieved well');
+        if (err) {
+            return console.error(err);
+        } else {
+            res.send(items);
+            console.log('Retreived successfully');
+        }
     });
 };
 
 studentsToExp.addNew = function(req, res) {
     stud = new Student(req.body);
 
-    console.log(req);
-
     stud.save(function (err, fluffy) {
         if (err) {
             return console.error(err);
         } else {
-            console.log('saved successfully');
+            console.log('Saved successfully');
         }
+    });
+};
 
-    })
+studentsToExp.updateByID = function(req, res) {
+    var id = req.params.id,
+        student = req.body;
+
+    delete student._id;
+
+    Student.update({ _id: id }, student, {upsert: true}, function(err, el) {
+        if (!err) {
+            console.log('User: ' + id + ' updated successfully');
+        } else {
+            return console.log(err);
+        }
+    });
+};
+
+studentsToExp.deleteByID = function(req, res) {
+    var id = req.params.id;
+
+    Student.remove({ _id: id }, function(err) {
+        if (!err) {
+            console.log('User: ' + id + ' deleted successfully');
+        } else {
+            return console.log(err);
+        }
+    });
 }
 
 exports.students = studentsToExp;
@@ -93,7 +112,6 @@ exports.students = studentsToExp;
 function PopulateDB() {
     var students = [
         {
-            id: 0,
             addedOn: Date.now(),
             name: "John",
             lastname: "Smith",
@@ -106,7 +124,6 @@ function PopulateDB() {
             certificationCost: 0
         },
         {
-            id: 1,
             addedOn: Date.now(),
             name: "Adam",
             lastname: "Walls",
@@ -119,7 +136,6 @@ function PopulateDB() {
             certificationCost: 20
         },
         {
-            id: 2,
             addedOn: Date.now(),
             name: "Walt",
             lastname: "White",
@@ -132,7 +148,6 @@ function PopulateDB() {
             certificationCost: 500
         },
         {
-            id: 3,
             addedOn: Date.now(),
             name: "Steve",
             lastname: "Corolsen",
@@ -144,7 +159,6 @@ function PopulateDB() {
             seminarCost: 80,
             certificationCost: 200
         },{
-            id: 4,
             addedOn: Date.now(),
             name: "Laury",
             lastname: "Kripkovski",
@@ -157,7 +171,6 @@ function PopulateDB() {
             certificationCost: 2000
         },
         {
-            id: 5,
             addedOn: Date.now(),
             name: "Robert",
             lastname: "Jakeson",
@@ -169,7 +182,6 @@ function PopulateDB() {
             seminarCost: 350,
             certificationCost: 800
         },{
-            id: 6,
             addedOn: Date.now(),
             name: "Carl",
             lastname: "Bennette",
@@ -182,7 +194,6 @@ function PopulateDB() {
             certificationCost: 400
         },
         {
-            id: 7,
             addedOn: Date.now(),
             name: "Abe",
             lastname: "Ricks",

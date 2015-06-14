@@ -3,12 +3,13 @@ define([
     'jquery',
     'backbone',
     'json!langs.json',
+    'text!templates/spinner.tpl',
     'text!templates/review.tpl',
     'text!templates/searchTable.tpl',
     'collections/students-collection',
     'stickyHeaders',
     'dropdown.bootstrap'
-], function(_, $, Backbone, Langs, Template, SearchTemplate, StudentsCollection){
+], function(_, $, Backbone, Langs, Spinner, Template, SearchTemplate, StudentsCollection){
     'use strict';
 
     return Backbone.View.extend({
@@ -49,14 +50,11 @@ define([
         initialize: function() {
             this.lang = Backbone.getLang();
 
+            this.spinner = _.template(Spinner);
             this.template = _.template(Template);
             this.searchTemplate = _.template(SearchTemplate);
 
             $(Backbone.areas.panelContent).html(this.$el);
-
-            StudentsCollection.fetch();
-
-            this.originalCollection = StudentsCollection.clone();
 
             this.delegateEvents();
         },
@@ -66,36 +64,49 @@ define([
                 search,
                 langsTpl;
 
-            Backbone.tryLogout();
+            // Backbone.tryLogout();
 
             options = options || {};
-            options.collection = options.collection || StudentsCollection;
 
-            // if (options.fetch) {
-                StudentsCollection.fetch();
-            // }
+            if (!options.noFetch) {
+                var that = this;
 
-            langsTpl = Langs[this.lang].views.review;
+                that.$el.html(that.spinner());
 
-            tpl = this.template({
-                students: options.collection.models,
-                lang: langsTpl,
-                opts: options
-            });
-
-            if (!options.leaveSearch) {
-                this.$el.html(this.searchTemplate({ lang: langsTpl })).append(tpl);
+                StudentsCollection.fetch({
+                    success: function(){
+                        setTimeout(function(){
+                            that.render({ noFetch: true });
+                        }, 1500);
+                    },
+                    error: function(){
+                        console.log('error');
+                    }
+                });
             } else {
-                search = $(this.configs.searchArea).detach();
-                this.$el.html(search).append(tpl);
-            }
+                options.collection = options.collection || StudentsCollection;
 
-            if (this.$el.is('.edit-mode')) {
-                $(this.configs.viewEditBtn).addClass(this.configs.editClass);
-                $(this.configs.deleteBtns).removeClass('invisible');
-            }
+                langsTpl = Langs[this.lang].views.review;
 
-            $('#review-tbl').stickyTableHeaders({ scrollableArea: $(".panel-body")[0] });
+                tpl = this.template({
+                    students: options.collection.models,
+                    lang: langsTpl
+                });
+
+                if (!options.leaveSearch) {
+                    this.$el.html(this.searchTemplate({ lang: langsTpl })).append(tpl);
+                } else {
+                    search = $(this.configs.searchArea).detach();
+                    this.$el.html(search).append(tpl);
+                }
+
+                if (this.$el.is('.edit-mode')) {
+                    $(this.configs.viewEditBtn).addClass(this.configs.editClass);
+                    $(this.configs.deleteBtns).removeClass('invisible');
+                }
+
+                $('#review-tbl').stickyTableHeaders({ scrollableArea: $(".panel-body")[0] });
+            }
 
             return this;
         },
@@ -115,9 +126,9 @@ define([
             var modelId = $(e.target).parents('tr').data('id'),
                 model;
 
-            Backbone.tryLogout();
+            // Backbone.tryLogout();
 
-            model = StudentsCollection.findWhere({ id: modelId });
+            model = StudentsCollection.findWhere({ _id: modelId });
             // StudentsCollection.remove(model);
             model.destroy();
 
@@ -129,7 +140,7 @@ define([
                 searchByVal = target.html(),
                 searchModelField = target.data('search');
 
-            Backbone.tryLogout();
+            // Backbone.tryLogout();
 
             this.$searchByBtn = $(this.configs.searchByBtn);
             this.$searchByBtn.

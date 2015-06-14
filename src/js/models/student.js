@@ -11,8 +11,10 @@ define([
 
         urlRoot: '/students',
 
+        idAttribute: '_id',
+
         defaults: {
-            _id: 0,
+            _id: null,
             addedOn: Date.now(),
             name: "John",
             lastname: "Smith",

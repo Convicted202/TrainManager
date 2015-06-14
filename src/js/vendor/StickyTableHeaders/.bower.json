@@ -32,6 +32,5 @@
   },
   "_source": "git://github.com/jmosbech/StickyTableHeaders.git",
   "_target": "~0.1.17",
-  "_originalSource": "StickyTableHeaders",
-  "_direct": true
+  "_originalSource": "StickyTableHeaders"
 }
