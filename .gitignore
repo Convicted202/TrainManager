@@ -3,6 +3,8 @@ node_modules
 
 #ignore vendor modules which are distributed via bower
 src/js/vendor
+src/stylesheets/sass/.sass-cache/**
+dist/**
 
 *.sublime-project
 *.sublime-workspace
