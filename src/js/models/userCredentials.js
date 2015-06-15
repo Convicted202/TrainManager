@@ -8,6 +8,7 @@ define([
         defaults: {
             email: 'admin@example.com',
             password: 'qwerty',
+            admin: false,
             expirationDate: '0',
             logged: false
         },

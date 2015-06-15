@@ -1,68 +1,13 @@
-var mongoose = require('mongoose'),
-    Student  = require('../models/studentModel').Student;
+var Student  = require('../models/studentModel').Student;
 
-// var Server  = mongo.Server,
-//     Db      = mongo.Db,
-//     BSON    = mongo.BSONPure;
-
-var db,
-    server,
-    studentsToExp = {};
-
-// server = new Server('localhost', 27017, {auto_reconnect: true});
-// db = new Db('studentsTrainingDB', server, {safe: true});
-
-mongoose.connect('mongodb://localhost/studentsTrainingDB');
-
-// db.open(function(err, db) {
-//     if(!err) {
-//         console.log("Connected to 'studentsTrainingDB' database");
-//         db.collection('students', {strict: true}, function(err, collection) {
-//             if (err) {
-//                 console.log("The 'students' collection doesn't exist. Creating it with sample data...");
-//                 PopulateDB();
-//             }
-
-//             // collection.insert(student, {safe:true}, function(err, result) {
-//             //     if (err) {
-//             //         console.log('error occured');
-//             //     } else {
-//             //         console.log('everything okay');
-//             //     }
-//             // });
-//         });
-//     }
-// });
-
-db = mongoose.connection;
-
-db.on('error', function() {
-    console.error.bind(console, 'connection error:')
-});
-
-db.on('open', function (callback) {
-    console.log('connected successfully');
-    // Student.find(function(err, items) {
-    //     if (!items.length) {
-    //         PopulateDB();
-    //     }
-    // })
-
-
-    // db.collectionNames(function (err, names) {
-    //     console.log(names); // [{ name: 'dbname.myCollection' }]
-    //     // module.exports.Collection = names;
-    // });
-    // console.log(db);
-    // console.log(Student)
-});
+var studentsToExp = {};
 
 studentsToExp.retrieveAll = function(req, res) {
     Student.find(function(err, items) {
         if (err) {
             return console.error(err);
         } else {
-            res.send(items);
+            res.json(items);
             console.log('Retreived successfully');
         }
     });
