@@ -64,8 +64,6 @@ define([
                 search,
                 langsTpl;
 
-            // Backbone.tryLogout();
-
             options = options || {};
 
             if (!options.noFetch) {
@@ -126,8 +124,6 @@ define([
             var modelId = $(e.target).parents('tr').data('id'),
                 model;
 
-            // Backbone.tryLogout();
-
             model = StudentsCollection.findWhere({ _id: modelId });
             // StudentsCollection.remove(model);
             model.destroy();
@@ -139,8 +135,6 @@ define([
             var target = $(e.target).is('a') ? $(e.target) : $(e.target).find('a'),
                 searchByVal = target.html(),
                 searchModelField = target.data('search');
-
-            // Backbone.tryLogout();
 
             this.$searchByBtn = $(this.configs.searchByBtn);
             this.$searchByBtn.

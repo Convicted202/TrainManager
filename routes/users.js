@@ -42,6 +42,8 @@ usersToExp.authenticate = function(req, res) {
             return console.log(err);
         }
 
+        console.log('in auth');
+
         if (!user) {
             console.log(req.body.email);
 

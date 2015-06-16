@@ -1,6 +1,5 @@
 define([
-    'backbone',
-    // 'backbone.localStorage'
+    'backbone'
     ], function(Backbone) {
     'use strict';
 
@@ -13,7 +12,6 @@ define([
 
 
         url: '/preferences',
-        // localStorage : new Backbone.LocalStorage('preferences'),
 
         validate: function(attrs, options) {
 

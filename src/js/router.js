@@ -27,22 +27,35 @@ define([
             panelContent: '#panel-content'
         },
 
-        tryLogout: function() {
-            cred = new CredModel();
-            cred.fetch();
-            if (cred.isExpired()) {
-                Backbone.history.navigate('login');
-                Backbone.history.loadUrl();
-                return;
-            }
-        },
-
         getLang: function() {
             var model = new PreferencesModel();
             model.fetch();
             return model.get('lang').toLowerCase();
         }
     });
+
+    var backboneSync = Backbone.sync
+
+    Backbone.sync = function (method, model, options) {
+        var token = window.sessionStorage['access-token'];
+
+        if (token) {
+            options.headers = {
+                'x-access-token': token
+            }
+        }
+
+        options.error = function(xhr) {
+            console.log('backbone send error');
+
+            window.location.hash = '#login';
+
+            return false;
+        }
+
+        // call the original function
+        backboneSync(method, model, options);
+    };
 
     var Renderer = new function () {
 

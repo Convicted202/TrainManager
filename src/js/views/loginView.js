@@ -5,9 +5,10 @@ define([
     'json!langs.json',
     'text!templates/login.tpl',
     'text!templates/spinner.tpl',
-    'models/userCredentials',
-    'models/preferences'
-], function(_, $, Backbone, Langs, Template, SpinnerTemplate, Model, PreferencesModel){
+    'models/userCredentials'
+    // ,
+    // 'models/preferences'
+], function(_, $, Backbone, Langs, Template, SpinnerTemplate, Model){
     'use strict';
 
     return Backbone.View.extend({
@@ -52,24 +53,25 @@ define([
 
             model = new Model({
                 email: $email.val(),
-                password: $pass.val(),
-                expirationDate: Date.now() + this.keepAliveTime
+                password: $pass.val()
             });
 
-            model.on('invalid', function(model, errorArr) {
-                $.notify(errorArr, "error");
-                $pass.val('');
-            });
+            // model.on('invalid', function(model, errorArr) {
+            //     $.notify(errorArr, "error");
+            //     $pass.val('');
+            // });
 
-            model.save(null, {
-                success: function() {
-                    Backbone.history.navigate('');
-                    $(Backbone.areas.appContainer).html(root.spinner());
-                    setTimeout(function() {
-                        Backbone.history.loadUrl();
-                    }, 2000);
-                }
-            });
+            // model.save(null, {
+            //     success: function() {
+            //         Backbone.history.navigate('');
+            //         $(Backbone.areas.appContainer).html(root.spinner());
+            //         setTimeout(function() {
+            //             Backbone.history.loadUrl();
+            //         }, 2000);
+            //     }
+            // });
+
+            model.auth();
         },
 
         checkEnter: function(e) {

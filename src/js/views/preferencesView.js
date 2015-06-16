@@ -37,7 +37,6 @@ define([
 
         render: function() {
             var lng = this.model.get('langString');
-            Backbone.tryLogout();
 
             this.$el.append(this.template({ lang: Langs[this.lang].views.preferences, curLang: lng }));
 

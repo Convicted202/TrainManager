@@ -77,6 +77,9 @@ var app = express(),
 
     app.get('/api/users/setup', users.setupFirstUser);
     app.get('/api/users', users.getAllUsers);
+    app.get('/api', function(req, res) {
+        res.json({ message: 'API main page' });
+    });
 
     app.get('/preferences', function(req, res) {
         res.send({

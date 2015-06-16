@@ -16,10 +16,6 @@ define([
 
         className: 'panel panel-default',
 
-        events : {
-            // 'click #fruit-list > .fruit' : 'fruitClickHandler',
-        },
-
         initialize: function() {
             this.lang = Backbone.getLang();
 
@@ -31,8 +27,6 @@ define([
         },
 
         render: function(area, areaName) {
-            // $(Backbone.areas.pageHeader).html(this.model.get('name'));
-
             this.$el.append(this.template({ _area: areaName, lang: Langs[this.lang].views.mainView }));
             new area().render();
 
