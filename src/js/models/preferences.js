@@ -5,11 +5,9 @@ define([
 
     return Backbone.Model.extend({
         defaults: {
-            email: 'admin@example.com',
-            lang: 'en',
-            langString: 'English'
+            lang: 'uk',
+            langString: 'Українська'
         },
-
 
         url: '/preferences',
 

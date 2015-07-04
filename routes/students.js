@@ -1,4 +1,5 @@
-var Student  = require('../models/studentModel').Student;
+var Student  = require('../models/studentModel').Student,
+    XLSX = require('xlsx');
 
 var studentsToExp = {};
 
@@ -13,13 +14,101 @@ studentsToExp.retrieveAll = function(req, res) {
     });
 };
 
+studentsToExp.loadFromXLS = function(req, res) {
+    // var data = new Uint8Array(req.body);
+    // console.log(data);
+    console.log(req.body);
+    // data = convert(req.body);
+
+    // var workbook = XLSX.read(data, {type: 'binary'});
+
+    // console.log(workbook);
+};
+
+studentsToExp.retrievePaidGrouped = function(req, res) {
+    var nonEmptyQuery =
+            Student.find().
+                where('seminarCost').ne('').
+                where('certificationCost').ne('');
+
+    nonEmptyQuery.
+        where({ 'levelType': 'Q' }).
+        sort({ 'levelToAchieve': -1 }).
+        exec(function(err, items) {
+            if (err) {
+                return console.log(err);
+            }
+            nonEmptyQuery.
+                where({ 'levelType': 'D' }).
+                sort({ 'levelToAchieve': 1 }).
+                exec(function(otherErr, otherItems) {
+                    if (otherErr) {
+                        return console.log(otherErr);
+                    }
+                    var result = items.concat(otherItems),
+                        grouped = {};
+
+                    result.forEach(function(v, k) {
+                        var st = v.levelToAchieve + ' ' + v.levelType
+                        if (!grouped[st]) {
+                            grouped[st] = [];
+                        }
+                        grouped[st].push(v);
+                    });
+
+                    res.json(grouped);
+                    console.log('Retreived successfully');
+                });
+        });
+};
+
+studentsToExp.retrievePaidGroupedByEvent = function(req, res) {
+    var id = req.params.id,
+
+        nonEmptyQuery =
+            Student.find({ 'attachedEvent': id }).
+                where('seminarCost').ne('').
+                where('certificationCost').ne('');
+
+    nonEmptyQuery.
+        where({ 'levelType': 'Q' }).
+        sort({ 'levelToAchieve': -1 }).
+        exec(function(err, items) {
+            if (err) {
+                return console.log(err);
+            }
+            nonEmptyQuery.
+                where({ 'levelType': 'D' }).
+                sort({ 'levelToAchieve': 1 }).
+                exec(function(otherErr, otherItems) {
+                    if (otherErr) {
+                        return console.log(otherErr);
+                    }
+                    var result = items.concat(otherItems),
+                        grouped = {};
+
+                    result.forEach(function(v, k) {
+                        var st = v.levelToAchieve + ' ' + v.levelType
+                        if (!grouped[st]) {
+                            grouped[st] = [];
+                        }
+                        grouped[st].push(v);
+                    });
+
+                    res.json(grouped);
+                    console.log('Retreived successfully');
+                });
+        });
+}
+
 studentsToExp.addNew = function(req, res) {
     stud = new Student(req.body);
 
-    stud.save(function (err, fluffy) {
+    stud.save(function (err, student) {
         if (err) {
             return console.error(err);
         } else {
+            res.status(200).json(student);
             console.log('Saved successfully');
         }
     });
@@ -33,6 +122,7 @@ studentsToExp.updateByID = function(req, res) {
 
     Student.update({ _id: id }, student, {upsert: true}, function(err, el) {
         if (!err) {
+            res.status(200).json(el);
             console.log('User: ' + id + ' updated successfully');
         } else {
             return console.log(err);
@@ -43,8 +133,9 @@ studentsToExp.updateByID = function(req, res) {
 studentsToExp.deleteByID = function(req, res) {
     var id = req.params.id;
 
-    Student.remove({ _id: id }, function(err) {
+    Student.remove({ _id: id }, function(err, el) {
         if (!err) {
+            res.status(200).json(el);
             console.log('User: ' + id + ' deleted successfully');
         } else {
             return console.log(err);

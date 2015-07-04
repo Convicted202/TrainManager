@@ -175,6 +175,7 @@ module.exports = function(grunt) {
           'chartist/dist/chartist.min.js',
           'chartist-plugin-tooltip/dist/chartist-plugin-tooltip.min.js',
           'bootstrap/js/dropdown.js',
+          'bootstrap-select/dist/js/bootstrap-select.min.js',
           'StickyTableHeaders/js/jquery.stickytableheaders.min.js'
         ],
         dest: '<%= config.prod %>/js/vendor'
@@ -186,9 +187,11 @@ module.exports = function(grunt) {
           'templates/*',
           'index.html',
           'js/vendor/bootstrap/dist/css/bootstrap.min.css',
+          'js/vendor/bootstrap/dist/fonts/**',
+          'js/vendor/bootstrap-select/dist/css/bootstrap-select.min.css',
           'js/vendor/pikaday/css/pikaday.css',
-          'js/vendor/chartist/dist/chartist.min.css'
-          // 'favico.ico'
+          'js/vendor/chartist/dist/chartist.min.css',
+          'favico.ico'
         ],
         dest: '<%= config.prod %>/'
       }

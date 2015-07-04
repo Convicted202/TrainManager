@@ -7,11 +7,14 @@ var studentSchema = mongoose.Schema({
     lastname: String,
     birthdate: String,
     currentLevel: Number,
+    currentLevelType: String,
     levelToAchieve: Number,
+    levelType: String,
     passportID: String,
     coachName: String,
     seminarCost: Number,
-    certificationCost: Number
+    certificationCost: Number,
+    attachedEvent: String
 }, {
     collection: 'students'
 });

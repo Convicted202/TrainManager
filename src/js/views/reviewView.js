@@ -76,10 +76,11 @@ define([
                         setTimeout(function(){
                             that.render({ noFetch: true });
                         }, 1500);
-                    },
-                    error: function(){
-                        console.log('error');
                     }
+                    // ,
+                    // error: function(){
+                    //     console.log('error');
+                    // }
                 });
             } else {
                 options.collection = options.collection || StudentsCollection;
@@ -128,7 +129,7 @@ define([
             // StudentsCollection.remove(model);
             model.destroy();
 
-            this.render({ leaveSearch: true });
+            this.render({ leaveSearch: true, noFetch: true });
         },
 
         selectSearchBy: function(e) {

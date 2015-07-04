@@ -1,10 +1,16 @@
 #ignore node modules
 node_modules
+npm-debug.log
+**/Thumbs.db
 
 #ignore vendor modules which are distributed via bower
 src/js/vendor
 src/stylesheets/sass/.sass-cache/**
+src/langs/langs.json
+src/stylesheets/css/app.css
 dist/**
+
+
 
 *.sublime-project
 *.sublime-workspace

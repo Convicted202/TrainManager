@@ -31,7 +31,7 @@
                 <td><%= student.get('lastname') %></td>
                 <td><%= student.get('birthdate') %></td>
                 <td><%= student.get('coachName') %></td>
-                <td><%= student.get('levelToAchieve') %></td>
+                <td><%= student.get('levelToAchieve') + ' ' + student.get('levelType') %></td>
                 <td><%= student.get('seminarCost') %></td>
                 <td><%= student.get('certificationCost') %></td>
                 <td class="deleteStudentBtn invisible"><div class="glyphicon glyphicon-trash btn-danger deleteStudentIcon"></div></td>

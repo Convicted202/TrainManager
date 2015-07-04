@@ -3,11 +3,8 @@ define([
     'jquery',
     'backbone',
     'json!langs.json',
-    'text!templates/mainPanel.tpl',
-    'views/createUpdateStudentView',
-    'views/reviewView',
-    'views/reportView'
-], function(_, $, Backbone, Langs, Template, CreateUpdateView, ReviewView, ReportView){
+    'text!templates/mainPanel.tpl'
+], function(_, $, Backbone, Langs, Template){
     'use strict';
 
     return Backbone.View.extend({
@@ -26,9 +23,9 @@ define([
             this.delegateEvents();
         },
 
-        render: function(area, areaName) {
+        render: function(area, areaName, options) {
             this.$el.append(this.template({ _area: areaName, lang: Langs[this.lang].views.mainView }));
-            new area().render();
+            new area().render(options);
 
             return this;
         }

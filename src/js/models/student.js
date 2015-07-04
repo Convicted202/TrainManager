@@ -24,25 +24,27 @@ define([
             passportID: "01234567",
             coachName: "Peter Anderson",
             seminarCost: 0,
-            certificationCost: 0
+            certificationCost: 0,
+            attachedEvent: '-1',
+            currentLevel: undefined
         },
 
         validate: function(attrs, options) {
             var errorsArr = [];
 
-            if (!attrs.passportID.match(this.configs.numberRegExp)) {
+            if (!this.configs.numberRegExp.test(attrs.passportID)) {
                 errorsArr.push('Passport ID should be a number');
             }
 
-            if (!attrs.levelToAchieve.match(this.configs.numberRegExp)) {
+            if (!this.configs.numberRegExp.test(attrs.levelToAchieve)) {
                 errorsArr.push('Achievement level should be a number');
             }
 
-            if (!attrs.seminarCost.match(this.configs.numberRegExp)) {
+            if (!this.configs.numberRegExp.test(attrs.seminarCost) && attrs.seminarCost) {
                 errorsArr.push('Seminar payment should be a number');
             }
 
-            if (!attrs.certificationCost.match(this.configs.numberRegExp)) {
+            if (!this.configs.numberRegExp.test(attrs.certificationCost) && attrs.certificationCost) {
                 errorsArr.push('Certification payment should be a number');
             }
 

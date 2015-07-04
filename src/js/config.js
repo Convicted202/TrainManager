@@ -12,6 +12,7 @@ var require = {
         stickyHeaders: 'vendor/StickyTableHeaders/js/jquery.stickytableheaders.min',
         notify: 'vendor/notifyjs/dist/notify-combined.min',
         'dropdown.bootstrap': 'vendor/bootstrap/js/dropdown',
+        dropdown: 'vendor/bootstrap-select/dist/js/bootstrap-select.min',
         chartist: 'vendor/chartist/dist/chartist.min',
         tooltip: 'vendor/chartist-plugin-tooltip/dist/chartist-plugin-tooltip.min'
     },
@@ -29,6 +30,7 @@ var require = {
         'stickyHeaders': ['jquery'],
         'notify': ['jquery'],
         'dropdown.bootstrap': ['jquery'],
+        'dropdown': ['jquery'],
         'tooltip': ['chartist']
     }
 };

@@ -1,8 +1,6 @@
 define([
     'backbone',
     'models/student'
-    // ,
-    // 'backbone.localStorage'
 ], function(Backbone, StudentModel) {
     'use strict';
 
@@ -10,7 +8,6 @@ define([
 
         model : StudentModel,
 
-        // localStorage : new Backbone.LocalStorage('students'),
         url: '/students',
 
         findMatches: function(props, query) {

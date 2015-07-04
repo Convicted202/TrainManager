@@ -5,6 +5,9 @@ html, body
     outline: 0
     padding: 0
 
+h2
+    margin-top: 0
+
 button
     outline: none !important
 
@@ -29,7 +32,7 @@ button
     @media #{$screen-query-medium}
         &
             width: 840px
-            height: 500px
+            height: 600px
             border: 1px solid #ddd
             -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .05)
             box-shadow: 0 1px 1px rgba(0, 0, 0, .05)
@@ -46,11 +49,11 @@ button
 
         @media #{$screen-query-medium}
             &
-                height: 437px
+                height: 537px
 
         @media #{$screen-query-large}
             &
-                height: 437px
+                height: 537px
 
 
     .input-obj
@@ -65,6 +68,23 @@ button
     #searchArea
         margin-left: 0
         margin-right: 0
+
+label
+    min-width: 40px
+    text-overflow: ellipsis
+    white-space: nowrap
+    overflow: hidden
+
+#lvl, #cur-lvl
+    padding-left: 0
+    margin-bottom: 0 !important
+
+#lvl_type, #cur-lvl_type
+    padding: 0
+    margin-bottom: 0 !important
+
+.btn-group.bootstrap-select
+    width: 100% !important
 
 #viewEditBtn
     button
@@ -85,6 +105,35 @@ button
         #viewBtn
             display: inline-block
 
+#events
+    .left-row
+        min-width: 250px
+        .row
+            margin-left: 0
+        .input-group-addon
+            color: #3c763d
+            background-color: #dff0d8
+            border-color: #A6D2A7
+            font-weight: bold
+            width: 30%
+    .notes-wrapper
+        min-width: 250px
+        padding-right: 0
+
+        .notes
+            padding: 0
+
+        .btn-add-evt
+            height: 50px
+            width: 50px
+            border-radius: 10%
+            position: relative
+            vertical-align: middle
+            top: 13px
+            float: right
+            border-color: #dff0d8
+            background-color: #a6d2a7
+            color: #3c763d
 
 #review-tbl
     thead
@@ -103,6 +152,12 @@ button
 
             .deleteStudentIcon
                 padding: 6px
+                border-radius: 3px
+                cursor: pointer
+
+        .upgradeStudentBtn
+            .glyphicon
+                padding: 7px
                 border-radius: 3px
                 cursor: pointer
 

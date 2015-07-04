@@ -7,12 +7,14 @@ define([
     'models/preferences',
     'views/createUpdateStudentView',
     'views/reviewView',
+    'views/groupedView',
+    'views/eventsView',
     'views/reportView',
     'views/mainPanelView',
     'views/preferencesView',
     'views/loginView',
     'collections/students-collection'
-    ], function($, _, Backbone, Student, CredModel, PreferencesModel, CreateUpdateView, ReviewView, ReportView, MainPanelView, PreferencesView, LoginView, StudentsCollection) {
+    ], function($, _, Backbone, Student, CredModel, PreferencesModel, CreateUpdateView, ReviewView, GroupedView, EventsView, ReportView, MainPanelView, PreferencesView, LoginView, StudentsCollection) {
 
 
     /*  Defining main areas from index.html
@@ -45,13 +47,12 @@ define([
             }
         }
 
-        options.error = function(xhr) {
-            console.log('backbone send error');
-
-            window.location.hash = '#login';
-
-            return false;
-        }
+        options.statusCode = {
+            401: function () {
+                window.location.href = window.location.origin + '/#login'
+                return false;
+            }
+        };
 
         // call the original function
         backboneSync(method, model, options);
@@ -77,6 +78,14 @@ define([
             return new MainPanelView().render(ReviewView, 'ReviewView');
         },
 
+        this.grouped = function(queryId) {
+            return new MainPanelView().render(GroupedView, 'GroupedView', { id: queryId });
+        },
+
+        this.events = function(query) {
+            return new MainPanelView().render(EventsView, 'EventsView');
+        }
+
         this.reports = function() {
             return new MainPanelView().render(ReportView, 'ReportView');
         },
@@ -97,6 +106,9 @@ define([
             "":                 Renderer.main,         // '/'' or '/#'
             "blankEntry":       Renderer.main,        // '/#main'
             "review":           Renderer.review,        // '/#box/(query)
+            "grouped":          Renderer.grouped,
+            "grouped/:queryId": Renderer.grouped,        // '/#box/(query)
+            "events":           Renderer.events,
             "reports":          Renderer.reports,    // '/#fruits/(query)
             "preferences":      Renderer.preferences
         }

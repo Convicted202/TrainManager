@@ -7,8 +7,10 @@ define([
     'text!templates/createStudentPanel.tpl',
     'models/student',
     'collections/students-collection',
+    'collections/events-collection',
+    'dropdown',
     'notify'
-], function(_, $, Backbone, Pikaday, Langs, Template, StudentModel, StudentsCollection){
+], function(_, $, Backbone, Pikaday, Langs, Template, StudentModel, StudentsCollection, EventsCollection){
     'use strict';
 
     return Backbone.View.extend({
@@ -30,7 +32,11 @@ define([
             coachName:  '#coach-name',
             level:      '#achievement-level',
             semCost:    '#seminar-payment',
-            certCost:   '#certification-payment'
+            certCost:   '#certification-payment',
+            levelType:  '#a-type',
+            curLevel:   '#current-lvl',
+            curLvlType: '#c-type',
+            semType:    '#sem-type'
         },
 
         initialize: function() {
@@ -64,12 +70,29 @@ define([
                 })
             }
 
+            EventsCollection.fetch({
+                success: function(data){
+                    data.models.forEach(function(v, k) {
+                        var option =
+                            $('<option data-subtext=' + v.get('_id') + '>' + v.get('eventID') + ' ' + v.get('eventTitle') + '</option>');
+                        $(root.configs.semType).append(option);
+                    });
+                    $(root.configs.semType).selectpicker('refresh');
+                }
+            });
+
+            $(this.configs.semType).selectpicker();
+            $(this.configs.levelType).selectpicker();
+            $(this.configs.curLvlType).selectpicker();
+
             return this;
         },
 
         tryFetchStudent: function(e) {
             var passID,
-                studentFound;
+                studentFound,
+                seminar,
+                event;
 
             passID = $(this.configs.passId).val();
             studentFound  = StudentsCollection.findWhere({
@@ -77,6 +100,26 @@ define([
             });
 
             if (studentFound) {
+                event = studentFound.get('attachedEvent');
+
+                if (event === '-1') {
+                    this.$semType.selectpicker('val', '');
+                } else {
+                    seminar = $(this.configs.semType).
+                        siblings().
+                        find('small.text-muted:contains("' + event + '")');
+
+                    this.$semType.
+                        selectpicker('val',
+                            seminar.
+                                parent().
+                                clone().
+                                children('small').
+                                remove().
+                                end().
+                                text());
+                }
+
                 this.$firstName.val(studentFound.get('name'));
                 this.$lastName.val(studentFound.get('lastname'));
                 this.$birthDate.val(studentFound.get('birthdate'));
@@ -84,6 +127,7 @@ define([
                 this.$coachName.val(studentFound.get('coachName'));
                 this.$semCost.val(studentFound.get('seminarCost'));
                 this.$certCost.val(studentFound.get('certificationCost'));
+                this.$levelType.selectpicker('val', studentFound.get('levelType'));
             }
         },
 
@@ -104,7 +148,11 @@ define([
         },
 
         saveStudent: function() {
-            var model;
+            var model,
+                seminar = $(this.configs.semType).
+                    siblings().
+                    find('li.selected').
+                    find('small.text-muted');
 
             // Backbone.tryLogout();
 
@@ -116,7 +164,9 @@ define([
                 passportID: this.$passId.val(),
                 coachName: this.$coachName.val(),
                 seminarCost: this.$semCost.val(),
-                certificationCost: this.$certCost.val()
+                certificationCost: this.$certCost.val(),
+                levelType: this.$levelType.val(),
+                attachedEvent: seminar.text()
             });
 
             model.on('invalid', function(model, errorArr) {
@@ -129,6 +179,11 @@ define([
         },
 
         updateStudent: function(studentFound) {
+            var seminar = $(this.configs.semType).
+                    siblings().
+                    find('li.selected').
+                    find('small.text-muted');
+
             studentFound.save({
                 name: this.$firstName.val(),
                 lastname: this.$lastName.val(),
@@ -136,7 +191,9 @@ define([
                 levelToAchieve: this.$level.val(),
                 coachName: this.$coachName.val(),
                 seminarCost: this.$semCost.val(),
-                certificationCost: this.$certCost.val()
+                certificationCost: this.$certCost.val(),
+                levelType: this.$levelType.val(),
+                attachedEvent: seminar.text()
             });
         }
 

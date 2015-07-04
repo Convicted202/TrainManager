@@ -5,7 +5,8 @@ var express     = require('express'),
     mongoose    = require('mongoose'),
     jwt         = require('jsonwebtoken'),
     students    = require('./routes/students').students,
-    users       = require('./routes/users').users;
+    users       = require('./routes/users').users,
+    events      = require('./routes/events').events;
 
 var app = express(),
     environment,
@@ -16,8 +17,9 @@ var app = express(),
 
     environment = process.env.NAME || 'src';
 
-    app.use(bodyParser.json());       // to support JSON-encoded bodies
+    app.use(bodyParser.json({ limit: '50mb' }));       // to support JSON-encoded bodies
     app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
+        limit: '50mb',
         extended: true
     }));
 
@@ -34,6 +36,10 @@ var app = express(),
     db.on('open', function (callback) {
         console.log('connected successfully');
     });
+
+    app.post('/preferences/upload', students.loadFromXLS);
+
+    app.get('/students/grouped/:id', students.retrievePaidGroupedByEvent);
 
     app.post('/api/authenticate', users.authenticate);
 
@@ -60,7 +66,7 @@ var app = express(),
         } else {
             // if there is no token
             // return an error
-            return res.status(403).send({
+            return res.status(401).send({
                 success: false,
                 message: 'No token provided.'
             });
@@ -71,9 +77,13 @@ var app = express(),
     console.log(process.env.name);
 
     app.get('/students', students.retrieveAll);
+
     app.post('/students', students.addNew);
     app.put('/students/:id', students.updateByID);
     app.delete('/students/:id', students.deleteByID);
+
+    app.get('/students/grouped', students.retrievePaidGrouped);
+
 
     app.get('/api/users/setup', users.setupFirstUser);
     app.get('/api/users', users.getAllUsers);
@@ -81,13 +91,17 @@ var app = express(),
         res.json({ message: 'API main page' });
     });
 
+    app.get('/events/fake', events.setupFakeEvents);
+    app.get('/events', events.retrieveAll);
+    app.post('/events', events.addNew);
+
     app.get('/preferences', function(req, res) {
         res.send({
             email: 'admin@example.com',
             lang: 'uk',
             langString: 'Українська'
         });
-    })
+    });
 
     app.post('/credentials', function(req, res) {
         res.send({

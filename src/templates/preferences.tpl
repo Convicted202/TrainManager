@@ -12,3 +12,7 @@
         </ul>
     </div>
 </h3>
+<h3>
+    <span class="label label-primary"><%= lang.upload %></span>
+    <input id="uploader" type="file" size="1"/>
+</h3>

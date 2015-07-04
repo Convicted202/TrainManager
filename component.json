@@ -16,6 +16,7 @@
     "StickyTableHeaders": "~0.1.17"
   },
   "devDependencies": {
-    "Backbone.localStorage": "~1.1.16"
+    "Backbone.localStorage": "~1.1.16",
+    "bootstrap-select": "~1.7.3"
   }
 }

@@ -10,6 +10,8 @@ en:
         mainView:
             createTab: Blank Entry
             reviewTab: Students Review
+            groupedTab: Grouped View
+            eventsTab: Events
             reportsTab: Reports
             preferencesTab: Preferences
         createStudent:
@@ -22,6 +24,8 @@ en:
             levelToAchieve: Level to Achieve
             seminarCost: Seminar Payment
             certCost: Certification Payment
+            seminarType: Seminar
+            currentLevel: Current Level
             saveBtn: Save
         review:
             passID: ID
@@ -44,9 +48,16 @@ en:
                 certCost: Certification Cost
                 editBtn: Edit
                 viewBtn: View
+        events:
+            eventID: ID
+            eventTitle: Caption
+            eventHeldDate: Held
+            eventCreatedDate: Created
+            notes: Notes
         preferences:
             title: Preferences
             langLabel: Language
+            upload: Upload File
             en: English
             uk: Ukrainian
             ru: Russian
@@ -64,6 +75,8 @@ ru:
         mainView:
             createTab: Новый студент
             reviewTab: Список студентов
+            groupedTab: Групповые списки
+            eventsTab: События
             reportsTab: Отчеты
             preferencesTab: Настройки
         createStudent:
@@ -76,6 +89,8 @@ ru:
             levelToAchieve: Добываемый уровень
             seminarCost: Стоимость семинара
             certCost: Стоимость сертификации
+            seminarType: Семинар
+            currentLevel: Текущий уровень
             saveBtn: Сохранить
         review:
             passID: Паспорт
@@ -98,9 +113,16 @@ ru:
                 certCost: Стоимость сертификации
                 editBtn: Редактировать
                 viewBtn: Показать
+        events:
+            eventID: №
+            eventTitle: Заголовок
+            eventHeldDate: Проводится
+            eventCreatedDate: Создано
+            notes: Заметки
         preferences:
             title: Настройки
             langLabel: Язык
+            upload: Загрузить файл
             en: Английский
             uk: Украинский
             ru: Русский
@@ -112,11 +134,13 @@ uk:
             signin: Вхід
             email: Email
             pass: Пароль
-            register: Регістрація
-            needhelp: Потібна допомога?
+            register: Реєстрація
+            needhelp: Потрібна допомога?
         mainView:
             createTab: Новий студент
             reviewTab: Список студентів
+            groupedTab: Групові списки
+            eventsTab: Події
             reportsTab: Звіти
             preferencesTab: Налаштування
         createStudent:
@@ -129,6 +153,8 @@ uk:
             levelToAchieve: Рівень на здобуття
             seminarCost: Вартість семінару
             certCost: Вартість сертифікації
+            seminarType: Семінар
+            currentLevel: Поточний рівень
             saveBtn: Зберегти
         review:
             passID: Паспорт
@@ -151,9 +177,16 @@ uk:
                 certCost: Вартість сертифікації
                 editBtn: Редагувати
                 viewBtn: Показати
+        events:
+            eventID: №
+            eventTitle: Заголовок
+            eventHeldDate: Проводиться
+            eventCreatedDate: Створена
+            notes: Примітки
         preferences:
             title: Налаштування
             langLabel: Мова
+            upload: Завантажити файл
             en: Англійська
             uk: Українська
             ru: Російська
