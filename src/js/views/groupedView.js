@@ -5,8 +5,9 @@ define([
     'json!langs.json',
     'text!templates/spinner.tpl',
     'text!templates/groupedView.tpl',
-    'collections/grouped-students-collection'
-], function(_, $, Backbone, Langs, Spinner, Template, StudentsCollectionFabric){
+    'collections/grouped-students-collection',
+    'collections/events-collection'
+], function(_, $, Backbone, Langs, Spinner, Template, StudentsCollectionFabric, EventsCollection){
     'use strict';
 
     return Backbone.View.extend({
@@ -14,6 +15,15 @@ define([
         id : 'grouped-view',
 
         className: 'tab-pane fade in active',
+
+        configs: {
+            title: '#event-title',
+            semType: '#sem-type'
+        },
+
+        events: {
+            'click #seminar-type li': 'selectGroup'
+        },
 
         modelProps: [
             'name',
@@ -61,9 +71,24 @@ define([
 
                 that.$el.html(that.spinner());
 
+                EventsCollection.fetch({
+                    success: function(data){
+                        that.on('grouped:rendered', function() {
+                            data.models.forEach(function(v, k) {
+                                var option =
+                                    $('<option data-subtext=' + v.get('_id') + '>' + v.get('eventID') + ' ' + v.get('eventTitle') + '</option>');
+                                $(that.configs.semType).append(option);
+                            });
+                            $(that.configs.semType).selectpicker('refresh');
+
+                            that.renderTitle(options.id);
+                        })
+                    }
+                });
+
                 options.collection.fetch({
                     success: function(){
-                        var opts = _.extend(options, {noFetch: true});
+                        var opts = _.extend(options, { noFetch: true });
 
                         setTimeout(function(){
                             that.render(opts);
@@ -71,7 +96,7 @@ define([
                     }
                 });
             } else {
-                langsTpl = Langs[this.lang].views.review;
+                langsTpl = Langs[this.lang].views.grouped;
 
                 tpl = this.template({
                     levels: options.collection.models[0] && options.collection.models[0].attributes,
@@ -79,9 +104,32 @@ define([
                 });
 
                 this.$el.html(tpl);
+
+                this.trigger('grouped:rendered');
+
+                $(this.configs.semType).selectpicker();
             }
 
             return this;
+        },
+
+        renderTitle: function(id) {
+            var event = EventsCollection.findWhere({ _id: id }),
+                date;
+
+            if (event) {
+                $(this.configs.semType).selectpicker('val', event.get('eventID') + ' ' + event.get('eventTitle'));
+                date = new Date(event.get('eventHeldDate'));
+                $(this.configs.title).html(date.toDateString());
+            }
+        },
+
+        selectGroup: function(e) {
+            var li = $(e.currentTarget),
+                id = li.find('.text-muted').text();
+
+            Backbone.history.navigate('grouped/' + id);
+            Backbone.history.loadUrl();
         }
 
     });

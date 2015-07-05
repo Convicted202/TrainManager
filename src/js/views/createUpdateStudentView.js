@@ -44,6 +44,8 @@ define([
 
             this.template = _.template(Template);
 
+            StudentsCollection.on('sync', this.onSyncSuccess);
+
             $(Backbone.areas.panelContent).html(this.$el);
 
             this.delegateEvents();
@@ -52,7 +54,6 @@ define([
         render: function() {
             var root = this;
 
-            // Backbone.tryLogout();
             StudentsCollection.fetch();
 
             this.$el.append(this.template({ lang: Langs[this.lang].views.createStudent }));
@@ -100,24 +101,12 @@ define([
             });
 
             if (studentFound) {
-                event = studentFound.get('attachedEvent');
+                event = EventsCollection.findWhere({ _id: studentFound.get('attachedEvent') });
 
-                if (event === '-1') {
+                if (!event) {
                     this.$semType.selectpicker('val', '');
                 } else {
-                    seminar = $(this.configs.semType).
-                        siblings().
-                        find('small.text-muted:contains("' + event + '")');
-
-                    this.$semType.
-                        selectpicker('val',
-                            seminar.
-                                parent().
-                                clone().
-                                children('small').
-                                remove().
-                                end().
-                                text());
+                    this.$semType.selectpicker('val', event.get('eventID') + ' ' + event.get('eventTitle'));
                 }
 
                 this.$firstName.val(studentFound.get('name'));
@@ -195,7 +184,9 @@ define([
                 levelType: this.$levelType.val(),
                 attachedEvent: seminar.text()
             });
-        }
+        },
+
+        onSyncSuccess: function() {}
 
     });
 });

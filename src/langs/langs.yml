@@ -48,6 +48,8 @@ en:
                 certCost: Certification Cost
                 editBtn: Edit
                 viewBtn: View
+        grouped:
+            seminarType: Seminar
         events:
             eventID: ID
             eventTitle: Caption
@@ -113,6 +115,8 @@ ru:
                 certCost: Стоимость сертификации
                 editBtn: Редактировать
                 viewBtn: Показать
+        grouped:
+            seminarType: Семинар
         events:
             eventID: №
             eventTitle: Заголовок
@@ -177,6 +181,8 @@ uk:
                 certCost: Вартість сертифікації
                 editBtn: Редагувати
                 viewBtn: Показати
+        grouped:
+            seminarType: Семінар
         events:
             eventID: №
             eventTitle: Заголовок

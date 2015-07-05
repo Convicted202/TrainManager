@@ -1,3 +1,16 @@
+<div class="row alert alert-info select-event">
+    <h2><%= lang.seminarType %></h2>
+    <div class="seminar-drop col-xs-6 col-sm-6 col-md-6 col-lg-6">
+        <div class="dropdown" id="seminar-type">
+            <select class="selectpicker" role="menu" id="sem-type" aria-labelledby="typeBtn">
+                <option role="presentation" selected></option>
+            </select>
+        </div>
+    </div>
+    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+        <h3 id="event-title"></h3>
+    </div>
+</div>
 
 <% _.each(levels, function(level, levelName) { %>
 
